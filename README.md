@@ -19,10 +19,11 @@ localhost only. In the browser, press `S` for speaker notes, `Esc` for the overv
 
 ## Working with an agent
 
-Don't edit the code yourself. Spend your time looking at the slides and making them intuitive for your listeners, and
-tell the agent what to change. Animations are quick to iterate on, so there is no real limit to what can go on a slide.
+What worked well for me: leave the code to the agent and spend the time thinking about content, about which
+figures, animations or tables would help the listeners most, and then look at the result as a listener would.
+Animations are quick to iterate on this way, so they become an easy option rather than a big investment.
 
-`AGENTS.md` holds the conventions the agent follows in this repo.
+`AGENTS.md` collects the conventions the agent follows in this repo.
 
 ## Layout
 
