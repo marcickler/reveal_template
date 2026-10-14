@@ -17,6 +17,13 @@ ssh -L 8000:localhost:8000 host           # on your laptop, then open http://loc
 `serve.py` is `python3 -m http.server` with caching disabled, so edits show up on a normal reload, and bound to
 localhost only. In the browser, press `S` for speaker notes, `Esc` for the overview, and `F` for full screen.
 
+## Working with an agent
+
+Don't edit the code yourself. Spend your time looking at the slides and making them intuitive for your listeners, and
+tell the agent what to change. Animations are quick to iterate on, so there is no real limit to what can go on a slide.
+
+`AGENTS.md` holds the conventions the agent follows in this repo.
+
 ## Layout
 
 | path | content |
@@ -37,10 +44,3 @@ An animated slide names a demo, and the demo is called on fragment changes:
 ```js
 demo("h1s", { init(section) {}, enter() {}, leave() {}, step(i) {} });  // i = highest visible fragment, -1 = none
 ```
-
-## Working with an agent
-
-Don't edit the code yourself. Spend your time looking at the slides and making them intuitive for your listeners, and
-tell the agent what to change. Animations are quick to iterate on, so there is no real limit to what can go on a slide.
-
-`AGENTS.md` holds the conventions the agent follows in this repo.
