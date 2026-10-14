@@ -3,9 +3,7 @@
 A template for scientific talks in plain HTML: reveal.js slides, d3 charts and animations, and KaTeX math, with a
 Beamer-like look. There is no build step, and all libraries are vendored, so the deck works offline.
 
-The look is deliberately plain. The deck should read as a clean, minimal science talk, not as something
-agent-generated: no cards, gradients, shadows, emoji or icon grids, just one clear figure per slide with
-little text.
+The look is deliberately plain: a clean, minimal science talk.
 
 ## Run
 
@@ -37,23 +35,9 @@ An animated slide names a demo, and the demo is called on fragment changes:
 demo("h1s", { init(section) {}, enter() {}, leave() {}, step(i) {} });  // i = highest visible fragment, -1 = none
 ```
 
-## Data and screenshots
-
-```bash
-uv sync
-.venv/bin/python scripts/h1s_data.py                  # regenerate data/h1s.js
-uv run playwright install chromium                    # once
-.venv/bin/python scripts/shots.py shots 3 4/0/2       # slide 3, and slide 4 at fragment 2
-```
-
 ## Working with an agent
 
-`AGENTS.md` holds the conventions an agent should follow in this repo. The workflow that worked for me:
+Don't edit the code yourself. Spend your time looking at the slides and making them intuitive for your listeners, and
+tell the agent what to change. Animations are quick to iterate on, so there is no real limit to what can go on a slide.
 
-1. Write an outline (`draft.md`): for each slide, what it should show and which figure or animation it needs.
-2. Let the agent draft a whole section. State the constraints up front, such as images over text and animations welcome.
-3. Review the live deck and give concrete feedback by slide number ("on slide 12 the log axis starts at 10^0 ...").
-4. The agent checks its changes with `shots.py` before reporting back.
-5. Generate every plot from a script on the real results, and ask the physics questions as well. Answers go into the
-   speaker notes.
-6. Commit at milestones. Add a line to `AGENTS.md` whenever you correct the same thing twice.
+`AGENTS.md` holds the conventions the agent follows in this repo.
