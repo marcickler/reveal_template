@@ -7,12 +7,15 @@ The look is deliberately plain: a clean, minimal science talk.
 
 ## Run
 
+Locally, just open `index.html` in a browser. On a remote machine, start the server there and forward the port:
+
 ```bash
-python3 scripts/serve.py 8000     # open http://localhost:8000
+python3 scripts/serve.py 8000             # on the server
+ssh -L 8000:localhost:8000 host           # on your laptop, then open http://localhost:8000
 ```
 
-On a remote machine, forward the port: `ssh -L 8000:localhost:8000 host`. In the browser, press `S` for speaker notes,
-`Esc` for the overview, and `F` for full screen.
+`serve.py` is `python3 -m http.server` with caching disabled, so edits show up on a normal reload, and bound to
+localhost only. In the browser, press `S` for speaker notes, `Esc` for the overview, and `F` for full screen.
 
 ## Layout
 
