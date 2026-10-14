@@ -5,6 +5,8 @@ Beamer-like look. There is no build step, and all libraries are vendored, so the
 
 The look is deliberately plain: a clean, minimal science talk.
 
+Live example: https://marcickler.github.io/reveal_template/
+
 ## Run
 
 Locally, just open `index.html` in a browser. On a remote machine, start the server there and forward the port:
