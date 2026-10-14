@@ -1,0 +1,137 @@
+@font-face { font-family: "Latin Modern Sans"; src: url(../lib/fonts/lmsans10-regular.otf); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Latin Modern Sans"; src: url(../lib/fonts/lmsans10-bold.otf); font-weight: 600 800; font-style: normal; }
+@font-face { font-family: "Latin Modern Sans"; src: url(../lib/fonts/lmsans10-oblique.otf); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Latin Modern Sans"; src: url(../lib/fonts/lmsans10-boldoblique.otf); font-weight: 600 800; font-style: italic; }
+
+:root {
+  --ink: #1c1c1c;
+  --muted: #5b5b64;
+  --faint: #9a9aa3;
+  --grid: #e4e4e8;
+  --paper: #ffffff;
+  --model: #0077bb;
+  --ref: #5d5d5d;
+  --compare: #ee7733;
+  --highlight: #cc3311;
+  --ood: #ee3377;
+  --accent: #009988;
+  --font: "Latin Modern Sans", "KaTeX_Main", "Helvetica Neue", Helvetica, Arial, "Nimbus Sans", sans-serif;
+}
+
+html, body { background: var(--paper); }
+
+.reveal {
+  font-family: var(--font);
+  font-size: 30px;
+  color: var(--ink);
+}
+.reveal .slides { text-align: left; }
+.reveal .slides section { height: 100%; padding: 0; box-sizing: border-box; }
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--font);
+  color: var(--ink);
+  text-transform: none;
+  margin: 0;
+}
+.reveal h2 { font-size: 46px; font-weight: 400; line-height: 1.1; }
+.reveal h3 { font-size: 28px; font-weight: 700; }
+.reveal p { margin: 0; line-height: 1.35; }
+.reveal b, .reveal strong { font-weight: 700; } /* reveal's reset.css sets font: inherit */
+.reveal .slide-number {
+  background: none; color: var(--muted); font-family: var(--font); font-size: 17px;
+  right: 40px; bottom: 12px; padding: 0; line-height: 1.2;
+}
+.reveal .slide-number a { color: inherit; text-decoration: none; }
+/* footline as in a Beamer talk: author left, section (the slide's .kicker) centred, page number right */
+.footer { position: absolute; left: 40px; bottom: 12px; font-size: 17px; line-height: 1.2; color: var(--muted); z-index: 10; }
+.is-title .footer, .is-title .slide-number { display: none; }
+
+/* ------------------------------------------------------------ layout */
+.slide { display: flex; flex-direction: column; height: 900px; padding: 46px 64px 58px; box-sizing: border-box; }
+.slide > h2 { margin-bottom: 26px; }
+.slide > h2 .sub { display: block; font-size: 26px; font-weight: 400; color: var(--muted); margin-top: 8px; }
+.body { flex: 1; min-height: 0; display: flex; gap: 40px; align-items: stretch; }
+.col { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.center { justify-content: center; align-items: center; }
+.grow { flex: 1; }
+.kicker { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 17px; line-height: 1.2; color: var(--muted); }
+.fig { width: 100%; height: 100%; object-fit: contain; display: block; }
+.figbox { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; position: relative; }
+.figbox > img { width: 100%; height: 100%; object-fit: contain; }
+.cite { font-size: 15px; color: var(--faint); margin-top: auto; }
+.cite a { color: var(--faint); }
+.small { font-size: 22px; color: var(--muted); }
+.muted { color: var(--muted); }
+.model { color: var(--model); }
+.compare { color: var(--compare); }
+.bad { color: var(--highlight); }
+
+/* ------------------------------------------------------------ title + section */
+.title-slide { padding: 0; position: relative; overflow: hidden; }
+.title-slide .text { position: absolute; left: 80px; top: 230px; width: 1100px; }
+.title-slide h1 { font-size: 60px; font-weight: 400; line-height: 1.12; }
+.title-slide h1 .model { display: block; font-size: 38px; margin-top: 22px; color: var(--muted); }
+.title-slide .who { margin-top: 56px; font-size: 28px; line-height: 1.5; }
+.section-slide { justify-content: center; align-items: center; text-align: center; }
+.section-slide .num { font-size: 28px; color: var(--muted); }
+.section-slide h2 { font-size: 60px; margin-top: 16px; }
+
+/* ------------------------------------------------------------ bullet lists of key numbers */
+.reveal ul.facts, .reveal ol.facts { margin: 0; padding-left: 1.2em; font-size: 26px; line-height: 1.3; display: flex; flex-direction: column; gap: 14px; }
+.reveal ul.facts.cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 60px; }
+.reveal .facts li::marker { color: var(--muted); }
+
+/* ------------------------------------------------------------ chips / keyword steps */
+.steps { display: flex; flex-direction: column; gap: 18px; }
+.step { display: flex; gap: 14px; align-items: baseline; font-size: 27px; }
+.step .dot { flex: none; width: 28px; text-align: center; font-weight: 700; color: var(--ink); }
+.step.no .dot { color: var(--highlight); }
+.step.warn .dot { color: var(--compare); }
+
+/* ------------------------------------------------------------ tables */
+.reveal table.res { border-collapse: collapse; font-size: 26px; width: 100%; }
+/* booktabs: rules above and below the table and under the header only */
+.reveal table.res { border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.reveal table.res th, .reveal table.res td { padding: 12px 18px; border: none; text-align: right; }
+.reveal table.res th { font-size: 21px; font-weight: 400; border-bottom: 1px solid var(--ink); vertical-align: bottom; }
+.reveal table.res td:first-child, .reveal table.res th:first-child { text-align: left; }
+.reveal table.res tr.hl td { font-weight: 700; }
+.reveal table.res td.na { color: var(--faint); }
+.reveal table.res.lit th, .reveal table.res.lit td { text-align: left; }
+
+/* ------------------------------------------------------------ interactive widgets */
+.ctrl { display: flex; align-items: center; gap: 16px; font-size: 22px; color: var(--muted); }
+.ctrl input[type=range] { width: 300px; accent-color: var(--model); }
+.ctrl .val { font-variant-numeric: tabular-nums; color: var(--ink); min-width: 110px; font-weight: 600; }
+.btn { font: inherit; font-size: 20px; white-space: nowrap; padding: 5px 14px; border-radius: 2px; border: 1px solid var(--faint);
+  background: white; color: var(--ink); cursor: pointer; }
+.btn:hover { border-color: var(--ink); }
+.btn.on { background: var(--grid); border-color: var(--ink); }
+.legend { display: flex; gap: 26px; font-size: 21px; color: var(--muted); align-items: center; flex-wrap: wrap; }
+.legend i { display: inline-block; width: 30px; height: 3px; vertical-align: middle; margin-right: 8px; }
+.legend i.dot { width: 14px; height: 14px; border-radius: 50%; }
+svg.chart { width: 100%; height: 100%; display: block; overflow: visible; font-family: var(--font); }
+svg.chart .axis text { font-size: 19px; fill: var(--muted); }
+svg.chart .axis path, svg.chart .axis line { stroke: var(--faint); }
+svg.chart .grid line { stroke: var(--grid); }
+svg.chart .grid path { display: none; }
+svg.chart .axlabel { font-size: 21px; fill: var(--ink); }
+svg.chart .note { font-size: 20px; fill: var(--muted); }
+.tip { position: absolute; pointer-events: none; background: rgba(28, 28, 28, 0.88); color: white; font-size: 18px;
+  padding: 6px 10px; white-space: nowrap; opacity: 0; transition: opacity 0.1s; }
+
+.reveal .fragment.fade-in-then-semi-out.visible:not(.current-fragment) { opacity: 0.35; }
+.reveal ul { margin: 0; }
+.reveal .katex { font-size: 1.05em; }
+.reveal sub { vertical-align: sub; font-size: 0.7em; }
+.reveal sup { vertical-align: super; font-size: 0.7em; }
+
+.eq { font-size: 21px; margin: 6px 0 4px; }
+.eq .katex-display { margin: 6px 0; text-align: left; }
+.eq.left .katex-display > .katex { text-align: left; padding-left: 28px; }
+.step > div { line-height: 1.25; }
+
+/* ------------------------------------------------------------ code */
+.reveal pre.code { margin: 0; padding: 16px 20px; background: #f6f6f8; border-left: 3px solid var(--grid); font-size: 18px; line-height: 1.4;
+  font-family: "DejaVu Sans Mono", Menlo, Consolas, monospace; white-space: pre; overflow: hidden; box-shadow: none; width: auto; }
+.reveal code { font-family: "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: 0.85em; }

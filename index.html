@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>reveal.js talk template</title>
+<link rel="stylesheet" href="lib/reveal/reset.css">
+<link rel="stylesheet" href="lib/reveal/reveal.css">
+<link rel="stylesheet" href="lib/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="reveal"><div class="footer">M. Ickler, reveal.js talk template</div><div class="slides">
+
+<!-- ============================================================ title -->
+<section data-state="is-title">
+  <div class="slide title-slide">
+    <div class="text">
+      <h1>Scientific talks in reveal.js
+        <span class="model">a template</span></h1>
+      <div class="who">Marc Ickler<br>press <b>S</b> for speaker notes, <b>Esc</b> for the overview</div>
+    </div>
+  </div>
+  <aside class="notes">This deck is the template: replace the slides, keep css/, js/common.js and the scripts.</aside>
+</section>
+
+<section>
+  <div class="slide section-slide">
+    <div class="num">Part 1</div>
+    <h2>The Setup</h2>
+  </div>
+</section>
+
+<!-- ============================================================ stack -->
+<section>
+  <div class="slide">
+    <div class="kicker">Setup</div>
+    <h2>Plain HTML, no build step</h2>
+    <div class="body">
+      <div class="col grow" style="justify-content:center">
+        <ul class="facts">
+          <li><b>reveal.js</b> for slides, fragments and speaker notes, fixed 1600×900 canvas</li>
+          <li><b>css/style.css</b>: Beamer-like look, Latin Modern Sans, colours as CSS variables</li>
+          <li><b>d3</b> for charts and animations, <b>KaTeX</b> for all math, also inside SVG</li>
+          <li><b>Python</b> scripts (uv) turn results into <code>data/*.js</code></li>
+          <li>Libraries vendored in <code>lib/</code>, so the deck works offline</li>
+        </ul>
+      </div>
+      <div class="col" style="flex:0.85;justify-content:center">
+<pre class="code">index.html        slides, one &lt;section&gt; each
+css/style.css     look and layout classes
+js/common.js      demo registry, chart helpers
+js/demos.js       one demo per animated slide
+data/*.js         generated, window.DATA
+scripts/*.py      data generation
+scripts/serve.py  no-cache local server
+scripts/shots.py  headless screenshots
+lib/              reveal, katex, d3, fonts</pre>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">No bundler or npm: open index.html via scripts/serve.py. Generated data files are plain scripts that set window.DATA, so they also load from file:// without fetch.</aside>
+</section>
+
+<!-- ============================================================ example chart -->
+<section data-demo="h1s">
+  <div class="slide">
+    <div class="kicker">Example</div>
+    <h2>Example: hydrogen 1s density in a Gaussian basis</h2>
+    <div class="body">
+      <div class="col grow"><div class="figbox"><svg class="chart" id="h1s-chart"></svg></div></div>
+      <div class="col" style="flex:0.55;justify-content:center">
+        <div class="steps">
+          <div class="step"><span class="dot">·</span><div>exact: cusp at the nucleus</div></div>
+          <div class="step fragment"><span class="dot">·</span><div>one Gaussian: no cusp</div></div>
+          <div class="step fragment"><span class="dot">·</span><div>STO-3G: closer, still flat at $r=0$</div></div>
+          <div class="step fragment"><span class="dot">·</span><div>log scale: tails decay as $e^{-\alpha r^2}$, not $e^{-2r}$</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cite">data: scripts/h1s_data.py</div>
+  </div>
+  <aside class="notes">Single optimal Gaussian alpha = 8/(9 pi). STO-3G exponents and coefficients for H with zeta 1.24. The log view is the point of the slide: any finite Gaussian expansion decays too fast far from the nucleus.</aside>
+</section>
+
+<!-- ============================================================ math + table -->
+<section>
+  <div class="slide">
+    <div class="kicker">Example</div>
+    <h2>Math and tables</h2>
+    <div class="body">
+      <div class="col grow" style="justify-content:center">
+        <div class="eq" style="font-size:30px">$$E[\psi] = \frac{\langle \psi | -\tfrac12 \nabla^2 - \tfrac1r | \psi \rangle}{\langle \psi | \psi \rangle} \;\ge\; E_0 = -\tfrac12\ \mathrm{Ha}$$</div>
+        <div class="eq fragment" style="font-size:30px">$$\psi(r) = \sum_{i} c_i \left(\tfrac{2\alpha_i}{\pi}\right)^{3/4} e^{-\alpha_i r^2}$$</div>
+      </div>
+      <div class="col grow" style="justify-content:center">
+        <table class="res fragment">
+          <tr><th>basis</th><th>Gaussians</th><th>$E$ (Ha)</th><th>$\rho(0)$</th></tr>
+          <tr><td>single Gaussian</td><td>1</td><td>$-0.4244$</td><td>0.0764</td></tr>
+          <tr><td>STO-3G</td><td>3</td><td>$-0.4666$</td><td>0.3947</td></tr>
+          <tr class="hl"><td>exact</td><td class="na">–</td><td>$-0.5000$</td><td>0.3183</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Numbers printed by scripts/h1s_data.py. Inline math uses $...$, display math $$...$$; KaTeX renders it once at load.</aside>
+</section>
+
+<!-- ============================================================ closing -->
+<section>
+  <div class="slide">
+    <div class="kicker">Workflow</div>
+    <h2>You design the figures, the agent builds them</h2>
+    <div class="body">
+      <div class="col grow" style="justify-content:center">
+        <div class="steps">
+          <div class="step"><span class="dot">1</span><div>Decide what each slide has to make obvious, and which figure or animation shows it best</div></div>
+          <div class="step fragment"><span class="dot">2</span><div>Let the agent implement it: d3 code, data scripts, layout, screenshot checks</div></div>
+          <div class="step fragment"><span class="dot">3</span><div>Review it as the audience will see it, and give concrete feedback per slide</div></div>
+        </div>
+      </div>
+      <div class="col fragment" style="flex:0.75;justify-content:center">
+<pre class="code" style="font-size:21px"># on the server, next to the agent
+python3 scripts/serve.py 8000
+
+# on your laptop, if the server is remote
+ssh -L 8000:localhost:8000 server
+
+# then open http://localhost:8000</pre>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Your time goes into what the audience should understand; the implementation is cheap now. Keep the slides plain: little text, one clear figure, details in the notes.</aside>
+</section>
+
+</div></div>
+
+<script src="lib/reveal/reveal.js"></script>
+<script src="lib/reveal/plugin/notes/notes.js"></script>
+<script src="lib/katex/katex.min.js"></script>
+<script src="lib/katex/auto-render.min.js"></script>
+<script src="lib/d3.min.js"></script>
+<script src="data/h1s.js"></script>
+<script src="js/common.js"></script>
+<script src="js/demos.js"></script>
+<script>
+  renderMathInElement(document.body, { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }] });
+  Reveal.initialize({
+    width: 1600, height: 900, margin: 0, center: false, hash: true, controls: false,
+    slideNumber: "c/t", progress: false, transition: "fade", transitionSpeed: "fast", backgroundTransition: "none",
+    plugins: [RevealNotes],
+  });
+</script>
+</body>
+</html>

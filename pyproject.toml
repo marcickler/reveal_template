@@ -1,0 +1,8 @@
+[project]
+name = "reveal-template"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["numpy>=2.0"]
+
+[dependency-groups]
+dev = ["playwright>=1.50"]
